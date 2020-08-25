@@ -7,11 +7,21 @@
 
     <fragment
         android:id="@+id/produtos"
-        android:name="com.example.gestaodacozinha.ui.main.MainFragment"
-        android:label="main_fragment"
-        tools:layout="@layout/main_fragment" />
+        android:name="com.example.gestaodacozinha.ui.produtos.ProdutosFragment"
+        android:label="Produtos"
+        tools:layout="@layout/produtos_fragment">
+        <action
+            android:id="@+id/action_produtos_to_adicionarProdutoFragment"
+            app:destination="@id/adicionarProdutoFragment" />
+    </fragment>
     <fragment
         android:id="@+id/categorias"
         android:name="com.example.gestaodacozinha.ui.categorias.CategoriasFragment"
-        android:label="CategoriasFragment" />
+        android:label="Categorias"
+        tools:layout="@layout/categorias_fragment" />
+    <fragment
+        android:id="@+id/adicionarProdutoFragment"
+        android:name="com.example.gestaodacozinha.ui.produtos.AdicionarProdutoFragment"
+        android:label="Adicionar Produto"
+        tools:layout="@layout/adicionar_produto_fragment" />
 </navigation>

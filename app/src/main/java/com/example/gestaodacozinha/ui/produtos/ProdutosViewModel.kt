@@ -1,7 +1,6 @@
-package com.example.gestaodacozinha.ui.main
+package com.example.gestaodacozinha.ui.produtos
 
 import android.app.Application
-import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.gestaodacozinha.data.Categoria
@@ -13,7 +12,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import timber.log.Timber
 
-class MainViewModel(
+class ProdutosViewModel(
     val database: ProdutosDao,
     application: Application
 ) : AndroidViewModel(application) {

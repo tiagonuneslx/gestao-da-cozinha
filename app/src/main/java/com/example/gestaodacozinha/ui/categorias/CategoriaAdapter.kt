@@ -1,28 +1,30 @@
-package com.example.gestaodacozinha.ui.main
+package com.example.gestaodacozinha.ui.categorias
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.example.gestaodacozinha.data.Categoria
 import com.example.gestaodacozinha.data.Produto
+import com.example.gestaodacozinha.databinding.ListItemCategoriaBinding
 import com.example.gestaodacozinha.databinding.ListItemProdutoBinding
 
-class ProdutoAdapter :
-    ListAdapter<Produto, ProdutoAdapter.ViewHolder>(ProdutoDiffCallback()) {
+class CategoriaAdapter :
+    ListAdapter<Categoria, CategoriaAdapter.ViewHolder>(CategoriaDiffCallback()) {
 
-    class ViewHolder private constructor(private val binding: ListItemProdutoBinding) : RecyclerView.ViewHolder(binding.root) {
+    class ViewHolder private constructor(private val binding: ListItemCategoriaBinding) : RecyclerView.ViewHolder(binding.root) {
 
         companion object {
             fun from(parent: ViewGroup): ViewHolder {
                 val layoutInflater = LayoutInflater.from(parent.context)
-                val binding = ListItemProdutoBinding.inflate(layoutInflater, parent, false)
+                val binding = ListItemCategoriaBinding.inflate(layoutInflater, parent, false)
                 return ViewHolder(binding)
             }
         }
 
-        fun bind(item: Produto) {
-            binding.produto = item
+        fun bind(item: Categoria) {
+            binding.categoria = item
             binding.executePendingBindings()
         }
     }
@@ -37,12 +39,12 @@ class ProdutoAdapter :
     }
 }
 
-class ProdutoDiffCallback : DiffUtil.ItemCallback<Produto>() {
-    override fun areItemsTheSame(oldItem: Produto, newItem: Produto): Boolean {
+class CategoriaDiffCallback : DiffUtil.ItemCallback<Categoria>() {
+    override fun areItemsTheSame(oldItem: Categoria, newItem: Categoria): Boolean {
         return oldItem === newItem
     }
 
-    override fun areContentsTheSame(oldItem: Produto, newItem: Produto): Boolean {
-        return oldItem.id == newItem.id
+    override fun areContentsTheSame(oldItem: Categoria, newItem: Categoria): Boolean {
+        return oldItem.nome == newItem.nome
     }
 }

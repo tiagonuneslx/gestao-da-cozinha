@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.example.gestaodacozinha.data.AppDatabase
 import com.example.gestaodacozinha.databinding.CategoriasFragmentBinding
+import com.example.gestaodacozinha.ui.produtos.ProdutoAdapter
 
 class CategoriasFragment : Fragment() {
 
@@ -22,6 +23,15 @@ class CategoriasFragment : Fragment() {
             val application = requireActivity().application
             val dataSource = AppDatabase.getInstance(application).produtosDao
             CategoriasViewModelFactory(dataSource, application)
+        }
+
+        val adapter = CategoriaAdapter()
+        binding.listaCategorias.adapter = adapter
+
+        viewModel.categorias.observe(viewLifecycleOwner) {
+            it?.let {
+                adapter.submitList(it)
+            }
         }
 
         binding.viewModel = viewModel

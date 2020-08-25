@@ -1,4 +1,4 @@
-package com.example.gestaodacozinha.ui.main
+package com.example.gestaodacozinha.ui.produtos
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,25 +6,23 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import com.example.gestaodacozinha.data.AppDatabase
-import com.example.gestaodacozinha.databinding.MainFragmentBinding
-import com.example.gestaodacozinha.ui.categorias.CategoriasViewModel
-import com.example.gestaodacozinha.ui.categorias.CategoriasViewModelFactory
+import com.example.gestaodacozinha.databinding.ProdutosFragmentBinding
 
-class MainFragment : Fragment() {
+class ProdutosFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
 
-        val binding = MainFragmentBinding.inflate(inflater, container, false)
+        val binding = ProdutosFragmentBinding.inflate(inflater, container, false)
 
-        val viewModel: MainViewModel by viewModels {
+        val viewModel: ProdutosViewModel by viewModels {
             val application = requireActivity().application
             val dataSource = AppDatabase.getInstance(application).produtosDao
-            MainViewModelFactory(dataSource, application)
+            ProdutosViewModelFactory(dataSource, application)
         }
 
         viewModel.produtos.observe(viewLifecycleOwner) {
@@ -42,6 +40,10 @@ class MainFragment : Fragment() {
             it?.let {
                 adapter.submitList(it)
             }
+        }
+
+        binding.botaoAdicionarProduto.setOnClickListener {
+            findNavController().navigate(ProdutosFragmentDirections.actionProdutosToAdicionarProdutoFragment())
         }
 
         binding.viewModel = viewModel
