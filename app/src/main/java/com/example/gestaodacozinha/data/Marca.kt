@@ -8,4 +8,6 @@ data class Marca(
     @PrimaryKey
     val nome: String,
     val branca: Boolean = true
-)
+) {
+    override fun toString() = nome
+}

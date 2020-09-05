@@ -7,4 +7,6 @@ import androidx.room.PrimaryKey
 data class Categoria(
     @PrimaryKey
     val nome: String,
-)
+) {
+    override fun toString() = nome
+}

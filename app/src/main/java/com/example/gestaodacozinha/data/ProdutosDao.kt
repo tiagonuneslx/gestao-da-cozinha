@@ -11,36 +11,38 @@ import androidx.room.Update
 @Dao
 interface ProdutosDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun inserirProduto(produto: Produto): Long
+    suspend fun inserirProduto(produto: Produto): Long
 
     @Update
-    fun atualizarProduto(produto: Produto)
+    suspend fun atualizarProduto(produto: Produto)
 
     @Delete
-    fun removerProduto(produto: Produto)
+    suspend fun removerProduto(produto: Produto)
 
     @Query("SELECT * FROM produto")
     fun obterTodosProdutos(): LiveData<List<Produto>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun inserirProdutoQuantidade(produtoQuantidade: ProdutoQuantidade)
+    suspend fun inserirProdutoQuantidade(produtoQuantidade: ProdutoQuantidade)
 
     @Delete
-    fun removerProdutoQuantidade(produtoQuantidade: ProdutoQuantidade)
+    suspend fun removerProdutoQuantidade(produtoQuantidade: ProdutoQuantidade)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun inserirCategoria(categoria: Categoria)
+    suspend fun inserirCategoria(categoria: Categoria)
 
     @Delete
-    fun removerCategoria(categoria: Categoria)
+    suspend fun removerCategoria(categoria: Categoria)
 
     @Query("SELECT * FROM categoria")
     fun obterTodasCategorias(): LiveData<List<Categoria>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun inserirMarca(marca: Marca)
+    suspend fun inserirMarca(marca: Marca)
 
     @Delete
-    fun removerMarca(marca: Marca)
+    suspend fun removerMarca(marca: Marca)
 
+    @Query("SELECT * FROM marca")
+    fun obterTodasMarcas(): LiveData<List<Categoria>>
 }

@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="com.example.gestaodacozinha.ui.categorias.CategoriasViewModel" />
+            type="com.example.gestaodacozinha.ui.produtos.categorias.CategoriasViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

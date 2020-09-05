@@ -1,4 +1,4 @@
-package com.example.gestaodacozinha.ui.categorias
+package com.example.gestaodacozinha.ui.produtos.categorias
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -6,9 +6,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.gestaodacozinha.data.Categoria
-import com.example.gestaodacozinha.data.Produto
 import com.example.gestaodacozinha.databinding.ListItemCategoriaBinding
-import com.example.gestaodacozinha.databinding.ListItemProdutoBinding
 
 class CategoriaAdapter :
     ListAdapter<Categoria, CategoriaAdapter.ViewHolder>(CategoriaDiffCallback()) {

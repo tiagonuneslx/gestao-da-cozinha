@@ -16,7 +16,7 @@
     </fragment>
     <fragment
         android:id="@+id/categorias"
-        android:name="com.example.gestaodacozinha.ui.categorias.CategoriasFragment"
+        android:name="com.example.gestaodacozinha.ui.produtos.categorias.CategoriasFragment"
         android:label="Categorias"
         tools:layout="@layout/categorias_fragment" />
     <fragment
