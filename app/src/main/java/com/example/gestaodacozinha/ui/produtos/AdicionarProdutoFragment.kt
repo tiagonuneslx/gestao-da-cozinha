@@ -1,76 +1,54 @@
 package com.example.gestaodacozinha.ui.produtos
 
+import android.app.Activity.RESULT_OK
 import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
-import android.provider.MediaStore
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
-import androidx.core.content.FileProvider
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import com.bumptech.glide.Glide
 import com.example.gestaodacozinha.data.AppDatabase
 import com.example.gestaodacozinha.databinding.AdicionarProdutoFragmentBinding
-import com.example.gestaodacozinha.utils.createImageFile
+import com.example.gestaodacozinha.utils.REQUEST_IMAGE_CAPTURE
+import com.example.gestaodacozinha.utils.apagarFotoAntigaSeExistir
+import com.example.gestaodacozinha.utils.preencher
+import com.example.gestaodacozinha.utils.tirarFoto
 import timber.log.Timber
 
-const val REQUEST_IMAGE_CAPTURE = 1
 
-class AdicionarProdutoFragment : Fragment(), AdapterView.OnItemSelectedListener {
+class AdicionarProdutoFragment : Fragment() {
+
+    lateinit var binding: AdicionarProdutoFragmentBinding
+
+    private val viewModel: AdicionarProdutosViewModel by viewModels {
+        val application = requireActivity().application
+        val dataSource = AppDatabase.getInstance(application).produtosDao
+        AdicionarProdutosViewModelFactory(dataSource, application)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
 
-        val binding = AdicionarProdutoFragmentBinding.inflate(inflater, container, false)
-
-        val viewModel: AdicionarProdutosViewModel by viewModels {
-            val application = requireActivity().application
-            val dataSource = AppDatabase.getInstance(application).produtosDao
-            AdicionarProdutosViewModelFactory(dataSource, application)
-        }
+        binding = AdicionarProdutoFragmentBinding.inflate(inflater, container, false)
 
         viewModel.categorias.observe(viewLifecycleOwner) {
-            ArrayAdapter(
-                requireContext(),
-                android.R.layout.simple_spinner_item,
-                it
-            ).also { adapter ->
-                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-                binding.categoriaSpinner.adapter = adapter
+            it?.let {
+                binding.categoriaSpinner.preencher(requireContext(), it)
             }
         }
 
         viewModel.marcas.observe(viewLifecycleOwner) {
-            ArrayAdapter(
-                requireContext(),
-                android.R.layout.simple_spinner_item,
-                it
-            ).also { adapter ->
-                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-                binding.marcaSpinner.adapter = adapter
+            it?.let {
+                binding.marcaSpinner.preencher(requireContext(), it)
             }
         }
 
-        // binding.categoriaSpinner.onItemSelectedListener = this
-
         binding.tirarFotoBotao.setOnClickListener {
-            Intent(MediaStore.ACTION_IMAGE_CAPTURE).also { takePictureIntent ->
-                takePictureIntent.resolveActivity(requireContext().packageManager)?.also {
-                    val photoURI: Uri = FileProvider.getUriForFile(
-                        requireContext(),
-                        "com.example.gestaodacozinha.fileprovider",
-                        createImageFile(requireContext())
-                    )
-                    Timber.i("Imagem guardada, URI: $photoURI")
-                    takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI)
-                    startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE)
-                }
-            }
+            viewModel.novaFotoUri = tirarFoto(requireContext(), this)
         }
 
         binding.viewModel = viewModel
@@ -79,11 +57,15 @@ class AdicionarProdutoFragment : Fragment(), AdapterView.OnItemSelectedListener 
         return binding.root
     }
 
-    override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
-        TODO("Not yet implemented")
-    }
-
-    override fun onNothingSelected(p0: AdapterView<*>?) {
-        TODO("Not yet implemented")
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
+            apagarFotoAntigaSeExistir(requireContext(), viewModel.fotoUri)
+            viewModel.fotoUri = viewModel.novaFotoUri
+            Glide.with(this)
+                .load(viewModel.fotoUri)
+                .into(binding.foto);
+            Timber.i("Imagem carregada!")
+        }
+        super.onActivityResult(requestCode, resultCode, data)
     }
 }

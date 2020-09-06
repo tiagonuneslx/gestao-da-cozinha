@@ -1,12 +1,7 @@
 package com.example.gestaodacozinha.data
 
 import androidx.lifecycle.LiveData
-import androidx.room.Dao
-import androidx.room.Delete
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
-import androidx.room.Update
+import androidx.room.*
 
 @Dao
 interface ProdutosDao {
@@ -44,5 +39,5 @@ interface ProdutosDao {
     suspend fun removerMarca(marca: Marca)
 
     @Query("SELECT * FROM marca")
-    fun obterTodasMarcas(): LiveData<List<Categoria>>
+    fun obterTodasMarcas(): LiveData<List<Marca>>
 }

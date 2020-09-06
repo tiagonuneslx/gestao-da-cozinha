@@ -24,21 +24,26 @@
             android:inputType="textShortMessage|textAutoCorrect|textCapSentences"
             app:layout_constraintBaseline_toBaselineOf="@+id/textView"
             app:layout_constraintEnd_toEndOf="parent"
+            android:text="@={viewModel.nome}"
             app:layout_constraintStart_toStartOf="parent" />
 
         <Spinner
             android:id="@+id/categoria_spinner"
-            android:layout_width="211dp"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="@+id/textView3"
-            app:layout_constraintStart_toStartOf="@+id/nome_textview" />
+            app:layout_constraintEnd_toEndOf="@+id/nome_textview"
+            app:layout_constraintStart_toStartOf="@+id/nome_textview"
+            app:selection="@={viewModel.categoria}" />
 
         <Spinner
             android:id="@+id/marca_spinner"
-            android:layout_width="211dp"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="@+id/textView5"
-            app:layout_constraintStart_toStartOf="@+id/categoria_spinner" />
+            app:layout_constraintEnd_toEndOf="@+id/categoria_spinner"
+            app:layout_constraintStart_toStartOf="@+id/categoria_spinner"
+            app:selection="@={viewModel.marca}" />
 
         <TextView
             android:id="@+id/textView"
@@ -84,11 +89,35 @@
 
         <Button
             android:id="@+id/tirar_foto_botao"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="Tirar foto"
+            app:layout_constraintEnd_toEndOf="@+id/marca_spinner"
             app:layout_constraintStart_toStartOf="@+id/marca_spinner"
             app:layout_constraintTop_toTopOf="@+id/textView6" />
+
+        <ImageView
+            android:id="@+id/foto"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:scaleType="centerCrop"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintEnd_toEndOf="@+id/tirar_foto_botao"
+            app:layout_constraintStart_toStartOf="@+id/tirar_foto_botao"
+            app:layout_constraintTop_toBottomOf="@+id/tirar_foto_botao"
+            app:srcCompat="@android:drawable/ic_menu_report_image" />
+
+        <Button
+            android:id="@+id/guardar_produto_botao"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:onClick="@{() -> viewModel.guardarProduto()}"
+            android:text="Guardar Produto"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/foto" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
