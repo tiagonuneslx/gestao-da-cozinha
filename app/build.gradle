@@ -65,6 +65,9 @@ dependencies {
     // ConstraintLayout
     implementation 'androidx.constraintlayout:constraintlayout:2.0.1'
 
+    // Activity
+    implementation "androidx.activity:activity-ktx:1.1.0"
+
     // Lifecycle Extensions
     implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
 

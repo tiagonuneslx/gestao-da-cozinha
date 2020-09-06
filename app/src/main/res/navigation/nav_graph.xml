@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_produtos_to_adicionarProdutoFragment"
             app:destination="@id/adicionarProdutoFragment" />
+        <action
+            android:id="@+id/action_produtos_to_produtoDetalhesFragment"
+            app:destination="@id/produtoDetalhesFragment" />
     </fragment>
     <fragment
         android:id="@+id/categorias"
@@ -29,5 +32,14 @@
             app:destination="@id/produtos"
             app:popUpTo="@id/adicionarProdutoFragment"
             app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/produtoDetalhesFragment"
+        android:name="com.example.gestaodacozinha.ui.produtos.ProdutoDetalhesFragment"
+        android:label="Detalhes do produto"
+        tools:layout="@layout/produto_detalhes_fragment">
+        <argument
+            android:name="produto"
+            app:argType="com.example.gestaodacozinha.data.Produto" />
     </fragment>
 </navigation>

@@ -4,6 +4,8 @@ import android.app.Application
 import android.view.View
 import android.widget.ImageView
 import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.gestaodacozinha.GestaoCozinhaApp
 import com.example.gestaodacozinha.data.Produto
@@ -21,10 +23,19 @@ class ProdutosViewModel(
 
     val produtos = database.obterTodosProdutos()
 
+    private val _navegarProdutoDetalhes = MutableLiveData<Pair<Produto, View>>(null)
+    val navegarProdutoDetalhes: LiveData<Pair<Produto, View>>
+        get() = _navegarProdutoDetalhes
+
     private var apagar = false
 
-    fun produtoClicado(produto: Produto) {
+    fun produtoClicado(produto: Produto, view: View) {
         if (apagar) apagarProduto(produto)
+        else _navegarProdutoDetalhes.value = Pair(produto, view)
+    }
+
+    fun navegarProdutoDetalhesConcluido() {
+        _navegarProdutoDetalhes.value = null
     }
 
     private fun apagarProduto(produto: Produto) {

@@ -1,6 +1,7 @@
 package com.example.gestaodacozinha.ui.produtos
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -48,7 +49,7 @@ class ProdutoAdapter(private val onClickListener: OnClickListener) :
         holder.bind(item, onClickListener)
     }
 
-    class OnClickListener(val clickListener: (produto: Produto) -> Unit) {
-        fun onClick(produto: Produto) = clickListener(produto)
+    class OnClickListener(val clickListener: (produto: Produto, view: View) -> Unit) {
+        fun onClick(produto: Produto, view: View) = clickListener(produto, view)
     }
 }

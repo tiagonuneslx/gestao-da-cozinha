@@ -20,7 +20,7 @@
         android:layout_height="wrap_content"
         android:onClick="@{() -> clickListener.onClick(categoria)}">
 
-        <TextView
+        <com.google.android.material.textview.MaterialTextView
             android:id="@+id/categoria_nome"
             android:layout_width="0dp"
             android:layout_height="wrap_content"

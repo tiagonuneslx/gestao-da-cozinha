@@ -6,7 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
+import com.example.gestaodacozinha.R
 import com.example.gestaodacozinha.data.AppDatabase
 import com.example.gestaodacozinha.databinding.ProdutosFragmentBinding
 
@@ -25,14 +27,26 @@ class ProdutosFragment : Fragment() {
             ProdutosViewModelFactory(dataSource, application)
         }
 
-        val adapter = ProdutoAdapter(ProdutoAdapter.OnClickListener { produto ->
-            viewModel.produtoClicado(produto)
+        val adapter = ProdutoAdapter(ProdutoAdapter.OnClickListener { produto, view ->
+            viewModel.produtoClicado(produto, view)
         })
         binding.listaProdutos.adapter = adapter
 
         viewModel.produtos.observe(viewLifecycleOwner) {
             it?.let {
                 adapter.submitList(it)
+            }
+        }
+
+        viewModel.navegarProdutoDetalhes.observe(viewLifecycleOwner) {
+            it?.let {
+                val nomeTransicaoProdutoDetalhes =
+                    getString(R.string.nome_transicao_produto_detalhes)
+                findNavController().navigate(
+                    ProdutosFragmentDirections.actionProdutosToProdutoDetalhesFragment(it.first),
+                    FragmentNavigatorExtras(it.second to nomeTransicaoProdutoDetalhes)
+                )
+                viewModel.navegarProdutoDetalhesConcluido()
             }
         }
 
