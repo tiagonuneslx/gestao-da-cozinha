@@ -8,10 +8,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.gestaodacozinha.data.Categoria
 import com.example.gestaodacozinha.databinding.ListItemCategoriaBinding
 
-class CategoriaAdapter :
-    ListAdapter<Categoria, CategoriaAdapter.ViewHolder>(CategoriaDiffCallback()) {
+class CategoriaAdapter(private val onClickListener: OnClickListener) :
+    ListAdapter<Categoria, CategoriaAdapter.ViewHolder>(DiffCallback) {
 
-    class ViewHolder private constructor(private val binding: ListItemCategoriaBinding) : RecyclerView.ViewHolder(binding.root) {
+    class ViewHolder private constructor(private val binding: ListItemCategoriaBinding) :
+        RecyclerView.ViewHolder(binding.root) {
 
         companion object {
             fun from(parent: ViewGroup): ViewHolder {
@@ -21,9 +22,20 @@ class CategoriaAdapter :
             }
         }
 
-        fun bind(item: Categoria) {
+        fun bind(item: Categoria, clickListener: OnClickListener) {
             binding.categoria = item
+            binding.clickListener = clickListener
             binding.executePendingBindings()
+        }
+    }
+
+    companion object DiffCallback : DiffUtil.ItemCallback<Categoria>() {
+        override fun areItemsTheSame(oldItem: Categoria, newItem: Categoria): Boolean {
+            return oldItem === newItem
+        }
+
+        override fun areContentsTheSame(oldItem: Categoria, newItem: Categoria): Boolean {
+            return oldItem.nome == newItem.nome
         }
     }
 
@@ -33,16 +45,10 @@ class CategoriaAdapter :
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = getItem(position)
-        holder.bind(item)
-    }
-}
-
-class CategoriaDiffCallback : DiffUtil.ItemCallback<Categoria>() {
-    override fun areItemsTheSame(oldItem: Categoria, newItem: Categoria): Boolean {
-        return oldItem === newItem
+        holder.bind(item, onClickListener)
     }
 
-    override fun areContentsTheSame(oldItem: Categoria, newItem: Categoria): Boolean {
-        return oldItem.nome == newItem.nome
+    class OnClickListener(val clickListener: (categoria: Categoria) -> Unit) {
+        fun onClick(categoria: Categoria) = clickListener(categoria)
     }
 }

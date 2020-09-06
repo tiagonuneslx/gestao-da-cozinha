@@ -10,11 +10,16 @@
             name="produto"
             type="com.example.gestaodacozinha.data.Produto" />
 
+        <variable
+            name="clickListener"
+            type="com.example.gestaodacozinha.ui.produtos.ProdutoAdapter.OnClickListener" />
+
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:onClick="@{() -> clickListener.onClick(produto)}">
 
         <ImageView
             android:id="@+id/produto_imagem"

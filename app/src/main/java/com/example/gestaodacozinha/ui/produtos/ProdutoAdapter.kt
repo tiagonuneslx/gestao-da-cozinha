@@ -8,10 +8,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.gestaodacozinha.data.Produto
 import com.example.gestaodacozinha.databinding.ListItemProdutoBinding
 
-class ProdutoAdapter :
-    ListAdapter<Produto, ProdutoAdapter.ViewHolder>(ProdutoDiffCallback()) {
+class ProdutoAdapter(private val onClickListener: OnClickListener) :
+    ListAdapter<Produto, ProdutoAdapter.ViewHolder>(DiffCallback) {
 
-    class ViewHolder private constructor(private val binding: ListItemProdutoBinding) : RecyclerView.ViewHolder(binding.root) {
+    class ViewHolder private constructor(private val binding: ListItemProdutoBinding) :
+        RecyclerView.ViewHolder(binding.root) {
 
         companion object {
             fun from(parent: ViewGroup): ViewHolder {
@@ -21,9 +22,20 @@ class ProdutoAdapter :
             }
         }
 
-        fun bind(item: Produto) {
+        fun bind(item: Produto, clickListener: OnClickListener) {
             binding.produto = item
+            binding.clickListener = clickListener
             binding.executePendingBindings()
+        }
+    }
+
+    companion object DiffCallback : DiffUtil.ItemCallback<Produto>() {
+        override fun areItemsTheSame(oldItem: Produto, newItem: Produto): Boolean {
+            return oldItem === newItem
+        }
+
+        override fun areContentsTheSame(oldItem: Produto, newItem: Produto): Boolean {
+            return oldItem.id == newItem.id
         }
     }
 
@@ -33,16 +45,10 @@ class ProdutoAdapter :
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = getItem(position)
-        holder.bind(item)
-    }
-}
-
-class ProdutoDiffCallback : DiffUtil.ItemCallback<Produto>() {
-    override fun areItemsTheSame(oldItem: Produto, newItem: Produto): Boolean {
-        return oldItem === newItem
+        holder.bind(item, onClickListener)
     }
 
-    override fun areContentsTheSame(oldItem: Produto, newItem: Produto): Boolean {
-        return oldItem.id == newItem.id
+    class OnClickListener(val clickListener: (produto: Produto) -> Unit) {
+        fun onClick(produto: Produto) = clickListener(produto)
     }
 }

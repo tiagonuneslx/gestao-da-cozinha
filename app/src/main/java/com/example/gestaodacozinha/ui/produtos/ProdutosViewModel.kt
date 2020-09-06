@@ -1,12 +1,14 @@
 package com.example.gestaodacozinha.ui.produtos
 
 import android.app.Application
+import android.view.View
+import android.widget.ImageView
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.gestaodacozinha.data.Categoria
-import com.example.gestaodacozinha.data.Marca
+import com.example.gestaodacozinha.GestaoCozinhaApp
 import com.example.gestaodacozinha.data.Produto
 import com.example.gestaodacozinha.data.ProdutosDao
+import com.example.gestaodacozinha.utils.alternarCorApagar
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -19,26 +21,27 @@ class ProdutosViewModel(
 
     val produtos = database.obterTodosProdutos()
 
-    fun adicionarProdutoExemplo() {
-        Timber.i("Adicionando Produtos")
+    private var apagar = false
+
+    fun produtoClicado(produto: Produto) {
+        if (apagar) apagarProduto(produto)
+    }
+
+    private fun apagarProduto(produto: Produto) {
         viewModelScope.launch {
             withContext(Dispatchers.IO) {
-                val categoria = Categoria("Laticínios")
-                database.inserirCategoria(categoria)
-
-                val marca = Marca("Mimosa")
-                database.inserirMarca(marca)
-
-                val produto = Produto(
-                    nome = "Leite Mimosa",
-                    foto = "foto_uri",
-                    categoria = categoria.nome,
-                    marca = marca.nome
-                )
-                val produtoId = database.inserirProduto(produto)
-
-                Timber.i("Produto exemplo adicionado, ID: $produtoId")
+                database.apagarProduto(produto)
+                Timber.d("Produto apagado: $produto.nome")
             }
         }
+    }
+
+    fun alternarApagar(view: View) {
+        apagar = !apagar
+        alternarCorApagar(
+            getApplication<GestaoCozinhaApp>(),
+            view as ImageView,
+            apagar
+        )
     }
 }

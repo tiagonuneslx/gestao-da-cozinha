@@ -24,7 +24,9 @@ class CategoriasFragment : Fragment() {
             CategoriasViewModelFactory(dataSource, application)
         }
 
-        val adapter = CategoriaAdapter()
+        val adapter = CategoriaAdapter(CategoriaAdapter.OnClickListener { categoria ->
+            viewModel.categoriaClicada(categoria)
+        })
         binding.listaCategorias.adapter = adapter
 
         viewModel.categorias.observe(viewLifecycleOwner) {

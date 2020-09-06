@@ -25,15 +25,9 @@ class ProdutosFragment : Fragment() {
             ProdutosViewModelFactory(dataSource, application)
         }
 
-        viewModel.produtos.observe(viewLifecycleOwner) {
-            it?.let {
-                if (it.isEmpty()) {
-                    viewModel.adicionarProdutoExemplo()
-                }
-            }
-        }
-
-        val adapter = ProdutoAdapter()
+        val adapter = ProdutoAdapter(ProdutoAdapter.OnClickListener { produto ->
+            viewModel.produtoClicado(produto)
+        })
         binding.listaProdutos.adapter = adapter
 
         viewModel.produtos.observe(viewLifecycleOwner) {
