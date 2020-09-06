@@ -1,13 +1,13 @@
 package com.example.gestaodacozinha.utils
 
 import android.content.Context
-import android.content.Intent
 import android.net.Uri
 import android.os.Environment
-import android.provider.MediaStore
-import androidx.core.content.FileProvider
-import androidx.fragment.app.Fragment
-import timber.log.Timber
+import android.widget.ImageView
+import androidx.databinding.BindingAdapter
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
+import com.example.gestaodacozinha.R
 import java.io.File
 import java.text.SimpleDateFormat
 import java.util.*
@@ -24,26 +24,16 @@ fun createImageFile(context: Context): File {
     )
 }
 
-fun apagarFotoAntigaSeExistir(context: Context, fotoUri: Uri?) {
-    fotoUri?.let {
-        val deleteResultCode = context.contentResolver.delete(it, null, null)
-        Timber.i("deleteResultCode: $deleteResultCode, URI: $it")
-    }
-}
-
-fun tirarFoto(context: Context, fragment: Fragment): Uri? {
-    var fotoUri: Uri? = null
-    Intent(MediaStore.ACTION_IMAGE_CAPTURE).also { intent ->
-        intent.resolveActivity(context.packageManager)?.also {
-            fotoUri = FileProvider.getUriForFile(
-                context,
-                "com.example.gestaodacozinha.fileprovider",
-                createImageFile(context)
+@BindingAdapter("imageUri")
+fun bindImageFromUri(imgView: ImageView, imageUri: Uri?) {
+    imageUri?.let {
+        Glide.with(imgView.context)
+            .load(it)
+            .apply(
+                RequestOptions()
+                    .placeholder(R.drawable.loading_animation)
+                    .error(R.drawable.ic_broken_image)
             )
-            Timber.i("Ficheiro para guardar imagem criado, URI: $fotoUri")
-            intent.putExtra(MediaStore.EXTRA_OUTPUT, fotoUri)
-            fragment.startActivityForResult(intent, REQUEST_IMAGE_CAPTURE)
-        }
+            .into(imgView)
     }
-    return fotoUri
 }

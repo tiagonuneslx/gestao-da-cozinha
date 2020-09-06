@@ -4,6 +4,8 @@
 
     <data>
 
+        <import type="android.net.Uri" />
+
         <variable
             name="produto"
             type="com.example.gestaodacozinha.data.Produto" />
@@ -16,12 +18,15 @@
 
         <ImageView
             android:id="@+id/produto_imagem"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="16dp"
+            android:scaleType="centerCrop"
+            app:imageUri="@{produto.foto != null ? Uri.parse(produto.foto) : null}"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -29,8 +34,10 @@
             android:id="@+id/produto_nome"
             android:layout_width="0dp"
             android:layout_height="20dp"
+            android:layout_marginTop="8dp"
             android:text="@{produto.nome}"
             android:textAlignment="center"
+            android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/produto_imagem"
             app:layout_constraintHorizontal_bias="0.0"

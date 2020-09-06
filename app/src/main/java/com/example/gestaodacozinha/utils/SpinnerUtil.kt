@@ -1,6 +1,5 @@
 package com.example.gestaodacozinha.utils
 
-import android.content.Context
 import android.view.View
 import android.widget.AdapterView
 import android.widget.AdapterView.OnItemSelectedListener
@@ -10,15 +9,17 @@ import androidx.databinding.BindingAdapter
 import androidx.databinding.InverseBindingAdapter
 import androidx.databinding.InverseBindingListener
 
-
-fun Spinner.preencher(context: Context, content: List<*>) {
-    ArrayAdapter(
-        context,
-        android.R.layout.simple_spinner_item,
-        content
-    ).also { adapter ->
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        this.adapter = adapter
+@BindingAdapter("content")
+fun setContent(spinner: Spinner, content: List<*>?) {
+    content?.let {
+        ArrayAdapter(
+            spinner.context,
+            android.R.layout.simple_spinner_item,
+            it
+        ).also { adapter ->
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            spinner.adapter = adapter
+        }
     }
 }
 

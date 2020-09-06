@@ -34,6 +34,7 @@
             app:layout_constraintBottom_toBottomOf="@+id/textView3"
             app:layout_constraintEnd_toEndOf="@+id/nome_textview"
             app:layout_constraintStart_toStartOf="@+id/nome_textview"
+            app:content="@{viewModel.categorias}"
             app:selection="@={viewModel.categoria}" />
 
         <Spinner
@@ -43,6 +44,7 @@
             app:layout_constraintBottom_toBottomOf="@+id/textView5"
             app:layout_constraintEnd_toEndOf="@+id/categoria_spinner"
             app:layout_constraintStart_toStartOf="@+id/categoria_spinner"
+            app:content="@{viewModel.marcas}"
             app:selection="@={viewModel.marca}" />
 
         <TextView
@@ -94,6 +96,7 @@
             android:text="Tirar foto"
             app:layout_constraintEnd_toEndOf="@+id/marca_spinner"
             app:layout_constraintStart_toStartOf="@+id/marca_spinner"
+            android:onClick="@{viewModel::tirarFoto}"
             app:layout_constraintTop_toTopOf="@+id/textView6" />
 
         <ImageView
@@ -105,14 +108,14 @@
             app:layout_constraintEnd_toEndOf="@+id/tirar_foto_botao"
             app:layout_constraintStart_toStartOf="@+id/tirar_foto_botao"
             app:layout_constraintTop_toBottomOf="@+id/tirar_foto_botao"
-            app:srcCompat="@android:drawable/ic_menu_report_image" />
+            app:imageUri="@{viewModel.fotoUri}" />
 
         <Button
             android:id="@+id/guardar_produto_botao"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="40dp"
-            android:onClick="@{() -> viewModel.guardarProduto()}"
+            android:onClick="@{viewModel::guardarProduto}"
             android:text="Guardar Produto"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.498"

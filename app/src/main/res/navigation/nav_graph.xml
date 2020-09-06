@@ -23,5 +23,11 @@
         android:id="@+id/adicionarProdutoFragment"
         android:name="com.example.gestaodacozinha.ui.produtos.AdicionarProdutoFragment"
         android:label="Adicionar Produto"
-        tools:layout="@layout/adicionar_produto_fragment" />
+        tools:layout="@layout/adicionar_produto_fragment">
+        <action
+            android:id="@+id/action_adicionarProdutoFragment_to_produtos"
+            app:destination="@id/produtos"
+            app:popUpTo="@id/adicionarProdutoFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
 </navigation>

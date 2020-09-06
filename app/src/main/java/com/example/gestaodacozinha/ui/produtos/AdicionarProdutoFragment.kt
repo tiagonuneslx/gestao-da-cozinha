@@ -8,14 +8,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import com.bumptech.glide.Glide
+import androidx.navigation.fragment.findNavController
 import com.example.gestaodacozinha.data.AppDatabase
 import com.example.gestaodacozinha.databinding.AdicionarProdutoFragmentBinding
 import com.example.gestaodacozinha.utils.REQUEST_IMAGE_CAPTURE
-import com.example.gestaodacozinha.utils.apagarFotoAntigaSeExistir
-import com.example.gestaodacozinha.utils.preencher
-import com.example.gestaodacozinha.utils.tirarFoto
-import timber.log.Timber
 
 
 class AdicionarProdutoFragment : Fragment() {
@@ -35,20 +31,18 @@ class AdicionarProdutoFragment : Fragment() {
 
         binding = AdicionarProdutoFragmentBinding.inflate(inflater, container, false)
 
-        viewModel.categorias.observe(viewLifecycleOwner) {
-            it?.let {
-                binding.categoriaSpinner.preencher(requireContext(), it)
+        viewModel.tirarFotoPedido.observe(viewLifecycleOwner) {
+            it?.let { intent ->
+                startActivityForResult(intent, REQUEST_IMAGE_CAPTURE)
+                viewModel.tirarFotoConcluido()
             }
         }
 
-        viewModel.marcas.observe(viewLifecycleOwner) {
-            it?.let {
-                binding.marcaSpinner.preencher(requireContext(), it)
+        viewModel.navegarProdutos.observe(viewLifecycleOwner) {
+            if (it != null && it) {
+                findNavController().navigate(AdicionarProdutoFragmentDirections.actionAdicionarProdutoFragmentToProdutos())
+                viewModel.navegarProdutosConcluido()
             }
-        }
-
-        binding.tirarFotoBotao.setOnClickListener {
-            viewModel.novaFotoUri = tirarFoto(requireContext(), this)
         }
 
         binding.viewModel = viewModel
@@ -59,12 +53,7 @@ class AdicionarProdutoFragment : Fragment() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
-            apagarFotoAntigaSeExistir(requireContext(), viewModel.fotoUri)
-            viewModel.fotoUri = viewModel.novaFotoUri
-            Glide.with(this)
-                .load(viewModel.fotoUri)
-                .into(binding.foto);
-            Timber.i("Imagem carregada!")
+            viewModel.fotoTirada()
         }
         super.onActivityResult(requestCode, resultCode, data)
     }
