@@ -42,4 +42,9 @@
             android:name="produto"
             app:argType="com.example.gestaodacozinha.data.Produto" />
     </fragment>
+    <fragment
+        android:id="@+id/marcas"
+        android:name="com.example.gestaodacozinha.ui.produtos.marcas.MarcasFragment"
+        android:label="Marcas"
+        tools:layout="@layout/marcas_fragment" />
 </navigation>

@@ -1,7 +1,7 @@
 package com.example.gestaodacozinha
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
@@ -20,7 +20,7 @@ class MainActivity : AppCompatActivity() {
         val navController = findNavController(R.id.nav_host_fragment)
         appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.produtos, R.id.categorias
+                R.id.produtos, R.id.categorias, R.id.marcas
             ),
             binding.drawerLayout
         )

@@ -6,4 +6,7 @@
     <item
         android:id="@+id/categorias"
         android:title="Categorias" />
+    <item
+        android:id="@+id/marcas"
+        android:title="Marcas" />
 </menu>
