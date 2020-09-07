@@ -14,8 +14,12 @@ interface ProdutosDao {
     @Delete
     suspend fun apagarProduto(produto: Produto)
 
-    @Query("SELECT * FROM produto ORDER BY id DESC")
+    @Query("SELECT * FROM produtos ORDER BY id DESC")
     fun obterTodosProdutos(): LiveData<List<Produto>>
+
+    @Transaction
+    @Query("SELECT * FROM produtos WHERE id = :produtoId")
+    fun obterProdutoComTudo(produtoId: Long): LiveData<ProdutoComTudo>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun inserirProdutoQuantidade(produtoQuantidade: ProdutoQuantidade)
@@ -29,7 +33,7 @@ interface ProdutosDao {
     @Delete
     suspend fun apagarCategoria(categoria: Categoria)
 
-    @Query("SELECT * FROM categoria ORDER BY nome")
+    @Query("SELECT * FROM categorias ORDER BY nome")
     fun obterTodasCategorias(): LiveData<List<Categoria>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
@@ -38,6 +42,6 @@ interface ProdutosDao {
     @Delete
     suspend fun apagarMarca(marca: Marca)
 
-    @Query("SELECT * FROM marca ORDER BY nome")
+    @Query("SELECT * FROM marcas ORDER BY nome")
     fun obterTodasMarcas(): LiveData<List<Marca>>
 }

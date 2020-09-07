@@ -3,7 +3,7 @@ package com.example.gestaodacozinha.data
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity(tableName = "marca")
+@Entity(tableName = "marcas")
 data class Marca(
     @PrimaryKey
     val nome: String,
