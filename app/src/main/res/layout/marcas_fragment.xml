@@ -24,6 +24,7 @@
             android:onClick="@{viewModel::adicionarMarca}"
             android:text="Adicionar Marca"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.502"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName" />
 
@@ -65,6 +66,17 @@
             app:layout_constraintStart_toEndOf="@+id/botao_adicionar_marca"
             app:layout_constraintTop_toTopOf="@+id/botao_adicionar_marca"
             app:srcCompat="@android:drawable/ic_menu_delete" />
+
+        <CheckBox
+            android:id="@+id/checkBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:checked="@={viewModel.novaMarcaBranca}"
+            android:text="Branca"
+            app:layout_constraintBottom_toBottomOf="@+id/editTextTextPersonName"
+            app:layout_constraintStart_toEndOf="@+id/editTextTextPersonName"
+            app:layout_constraintTop_toTopOf="@+id/editTextTextPersonName" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

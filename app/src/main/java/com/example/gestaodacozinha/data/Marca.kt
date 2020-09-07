@@ -9,6 +9,6 @@ data class Marca(
     val nome: String,
     val branca: Boolean = true
 ) {
-    override fun toString() = "$nome (${if (branca) "Branca" else "Original"})"
+    override fun toString() = "$nome${if (branca) " (Branca)" else ""}"
 
 }
