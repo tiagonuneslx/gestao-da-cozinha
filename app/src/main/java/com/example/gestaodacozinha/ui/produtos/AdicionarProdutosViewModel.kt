@@ -15,7 +15,7 @@ import com.example.gestaodacozinha.data.Categoria
 import com.example.gestaodacozinha.data.Marca
 import com.example.gestaodacozinha.data.Produto
 import com.example.gestaodacozinha.data.ProdutosDao
-import com.example.gestaodacozinha.utils.createImageFile
+import com.example.gestaodacozinha.utils.criarFicheiroDeImagem
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -38,6 +38,10 @@ class AdicionarProdutosViewModel(
         get() = _fotoUri
     private var novaFotoUri: Uri? = null
 
+    private val _pedirPermissoes = MutableLiveData(false)
+    val pedirPermissoes: LiveData<Boolean>
+        get() = _pedirPermissoes
+
     private val _tirarFotoPedido = MutableLiveData<Intent>(null)
     val tirarFotoPedido: LiveData<Intent>
         get() = _tirarFotoPedido
@@ -46,31 +50,40 @@ class AdicionarProdutosViewModel(
     val navegarProdutos: LiveData<Boolean>
         get() = _navegarProdutos
 
-    fun tirarFoto(view: View) {
-        val context = getApplication<GestaoCozinhaApp>()
+    val context = getApplication<GestaoCozinhaApp>()
+
+    fun tirarFotoClicado(view: View) {
+        _pedirPermissoes.value = true
+    }
+
+    fun pedirPermissoesConcluido() {
+        _pedirPermissoes.value = false
+    }
+
+    fun tirarFoto() {
         Intent(MediaStore.ACTION_IMAGE_CAPTURE).also { intent ->
             intent.resolveActivity(context.packageManager)?.also {
                 novaFotoUri = FileProvider.getUriForFile(
                     context,
                     "com.example.gestaodacozinha.fileprovider",
-                    createImageFile(context)
+                    criarFicheiroDeImagem(context)
                 )
-                Timber.i("Ficheiro para guardar imagem criado, URI: $novaFotoUri")
+                Timber.d("Ficheiro para guardar imagem criado, URI: $novaFotoUri")
                 intent.putExtra(MediaStore.EXTRA_OUTPUT, novaFotoUri)
                 _tirarFotoPedido.value = intent
             }
+                ?: Timber.w("Não há nenhuma app de câmera que reconheça o intent ACTION_IMAGE_CAPTURE!")
         }
     }
 
-    fun tirarFotoConcluido() {
+    fun tirarFotoPedidoConcluido() {
         _tirarFotoPedido.value = null
     }
 
     fun fotoTirada() {
-        val context = getApplication<GestaoCozinhaApp>()
         _fotoUri.value?.let {
             val deleteResultCode = context.contentResolver.delete(it, null, null)
-            Timber.i("deleteResultCode: $deleteResultCode, URI: $it")
+            Timber.d("deleteResultCode: $deleteResultCode, URI: $it")
         }
         _fotoUri.value = novaFotoUri
     }

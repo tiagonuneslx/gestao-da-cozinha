@@ -97,7 +97,7 @@
                 android:id="@+id/tirar_foto_botao"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:onClick="@{viewModel::tirarFoto}"
+                android:onClick="@{viewModel::tirarFotoClicado}"
                 android:text="Tirar foto"
                 app:layout_constraintEnd_toEndOf="@+id/marca_spinner"
                 app:layout_constraintStart_toStartOf="@+id/marca_spinner"

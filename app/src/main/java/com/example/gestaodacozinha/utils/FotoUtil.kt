@@ -14,7 +14,7 @@ import java.util.*
 
 const val REQUEST_IMAGE_CAPTURE = 1
 
-fun createImageFile(context: Context): File {
+fun criarFicheiroDeImagem(context: Context): File {
     val timestamp = SimpleDateFormat("yyyyMMdd_HHmmss", Locale.US).format(Date())
     val pasta = context.getExternalFilesDir(Environment.DIRECTORY_PICTURES)!!
     return File.createTempFile(

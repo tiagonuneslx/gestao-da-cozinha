@@ -1,17 +1,20 @@
 package com.example.gestaodacozinha.ui.produtos
 
+import android.Manifest
 import android.app.Activity.RESULT_OK
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.gestaodacozinha.data.AppDatabase
 import com.example.gestaodacozinha.databinding.AdicionarProdutoFragmentBinding
 import com.example.gestaodacozinha.utils.REQUEST_IMAGE_CAPTURE
+import com.example.gestaodacozinha.utils.permissoesNecessarias
 
 
 class AdicionarProdutoFragment : Fragment() {
@@ -31,10 +34,25 @@ class AdicionarProdutoFragment : Fragment() {
 
         binding = AdicionarProdutoFragmentBinding.inflate(inflater, container, false)
 
+        viewModel.pedirPermissoes.observe(viewLifecycleOwner) {
+            if (it != null && it) {
+                permissoesNecessarias(
+                    requireActivity() as AppCompatActivity,
+                    listOf(
+                        Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                        Manifest.permission.CAMERA
+                    ),
+                ) {
+                    viewModel.tirarFoto()
+                }
+                viewModel.pedirPermissoesConcluido()
+            }
+        }
+
         viewModel.tirarFotoPedido.observe(viewLifecycleOwner) {
             it?.let { intent ->
                 startActivityForResult(intent, REQUEST_IMAGE_CAPTURE)
-                viewModel.tirarFotoConcluido()
+                viewModel.tirarFotoPedidoConcluido()
             }
         }
 
