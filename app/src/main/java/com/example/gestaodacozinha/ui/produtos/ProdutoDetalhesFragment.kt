@@ -6,11 +6,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import com.example.gestaodacozinha.data.AppDatabase
 import com.example.gestaodacozinha.databinding.ProdutoDetalhesFragmentBinding
 import com.google.android.material.transition.MaterialContainerTransform
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class ProdutoDetalhesFragment : Fragment() {
+
+    private val viewModel: ProdutoDetalhesViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -18,13 +21,6 @@ class ProdutoDetalhesFragment : Fragment() {
     ): View? {
 
         val binding = ProdutoDetalhesFragmentBinding.inflate(inflater, container, false)
-
-        val viewModel: ProdutoDetalhesViewModel by viewModels {
-            val application = requireActivity().application
-            val dataSource = AppDatabase.getInstance(application).produtosDao
-            val produto = ProdutoDetalhesFragmentArgs.fromBundle(requireArguments()).produto
-            ProdutoDetalhesViewModelFactory(dataSource, produto, application)
-        }
 
         sharedElementEnterTransition = MaterialContainerTransform()
 

@@ -1,16 +1,21 @@
 package com.example.gestaodacozinha.ui.produtos
 
 import android.app.Application
+import androidx.hilt.Assisted
+import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.SavedStateHandle
+import com.example.gestaodacozinha.data.AppDatabase
 import com.example.gestaodacozinha.data.Produto
-import com.example.gestaodacozinha.data.ProdutosDao
 
-class ProdutoDetalhesViewModel(
-    val database: ProdutosDao,
-    produto: Produto,
+class ProdutoDetalhesViewModel @ViewModelInject constructor(
+    private val database: AppDatabase,
+    @Assisted savedStateHandle: SavedStateHandle,
     application: Application
 ) : AndroidViewModel(application) {
 
-    val produtoComTudo = database.obterProdutoComTudo(produto.id)
+    val produtoComTudo = database.produtosDao.obterProdutoComTudo(
+        savedStateHandle.get<Produto>("produto")!!.id
+    )
 
 }

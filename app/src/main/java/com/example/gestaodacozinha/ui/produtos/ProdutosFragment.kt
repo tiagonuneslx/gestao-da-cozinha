@@ -9,10 +9,13 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import com.example.gestaodacozinha.R
-import com.example.gestaodacozinha.data.AppDatabase
 import com.example.gestaodacozinha.databinding.ProdutosFragmentBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class ProdutosFragment : Fragment() {
+
+    private val viewModel: ProdutosViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -20,12 +23,6 @@ class ProdutosFragment : Fragment() {
     ): View? {
 
         val binding = ProdutosFragmentBinding.inflate(inflater, container, false)
-
-        val viewModel: ProdutosViewModel by viewModels {
-            val application = requireActivity().application
-            val dataSource = AppDatabase.getInstance(application).produtosDao
-            ProdutosViewModelFactory(dataSource, application)
-        }
 
         val adapter = ProdutoAdapter(ProdutoAdapter.OnClickListener { produto, view ->
             viewModel.produtoClicado(produto, view)

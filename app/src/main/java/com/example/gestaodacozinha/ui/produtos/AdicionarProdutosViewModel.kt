@@ -6,28 +6,29 @@ import android.net.Uri
 import android.provider.MediaStore
 import android.view.View
 import androidx.core.content.FileProvider
+import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.gestaodacozinha.GestaoCozinhaApp
+import com.example.gestaodacozinha.data.AppDatabase
 import com.example.gestaodacozinha.data.Categoria
 import com.example.gestaodacozinha.data.Marca
 import com.example.gestaodacozinha.data.Produto
-import com.example.gestaodacozinha.data.ProdutosDao
 import com.example.gestaodacozinha.utils.criarFicheiroDeImagem
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import timber.log.Timber
 
-class AdicionarProdutosViewModel(
-    val database: ProdutosDao,
+class AdicionarProdutosViewModel @ViewModelInject constructor(
+    private val database: AppDatabase,
     application: Application
 ) : AndroidViewModel(application) {
 
-    val categorias = database.obterTodasCategorias()
-    val marcas = database.obterTodasMarcas()
+    val categorias = database.produtosDao.obterTodasCategorias()
+    val marcas = database.produtosDao.obterTodasMarcas()
 
     val nome = MutableLiveData("")
     val categoria = MutableLiveData<Categoria>(null)
@@ -46,7 +47,7 @@ class AdicionarProdutosViewModel(
     val tirarFotoPedido: LiveData<Intent>
         get() = _tirarFotoPedido
 
-    private val _navegarProdutos = MutableLiveData<Boolean>(false)
+    private val _navegarProdutos = MutableLiveData(false)
     val navegarProdutos: LiveData<Boolean>
         get() = _navegarProdutos
 
@@ -100,7 +101,7 @@ class AdicionarProdutosViewModel(
             )
             viewModelScope.launch {
                 withContext(Dispatchers.IO) {
-                    database.inserirProduto(produto)
+                    database.produtosDao.inserirProduto(produto)
                     Timber.d("Produto $produto adicionado com sucesso!")
                 }
                 _navegarProdutos.value = true

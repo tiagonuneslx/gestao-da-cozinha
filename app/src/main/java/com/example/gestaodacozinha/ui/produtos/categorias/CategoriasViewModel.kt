@@ -3,12 +3,13 @@ package com.example.gestaodacozinha.ui.produtos.categorias
 import android.app.Application
 import android.view.View
 import android.widget.ImageView
+import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.gestaodacozinha.GestaoCozinhaApp
+import com.example.gestaodacozinha.data.AppDatabase
 import com.example.gestaodacozinha.data.Categoria
-import com.example.gestaodacozinha.data.ProdutosDao
 import com.example.gestaodacozinha.utils.alternarCorApagar
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -16,12 +17,12 @@ import kotlinx.coroutines.withContext
 import timber.log.Timber
 
 
-class CategoriasViewModel(
-    val database: ProdutosDao,
+class CategoriasViewModel @ViewModelInject constructor(
+    private val database: AppDatabase,
     application: Application
 ) : AndroidViewModel(application) {
 
-    val categorias = database.obterTodasCategorias()
+    val categorias = database.produtosDao.obterTodasCategorias()
 
     val novaCategoriaNome = MutableLiveData("")
 
@@ -32,7 +33,7 @@ class CategoriasViewModel(
             val categoria = Categoria(it)
             viewModelScope.launch {
                 withContext(Dispatchers.IO) {
-                    database.inserirCategoria(categoria)
+                    database.produtosDao.inserirCategoria(categoria)
                 }
             }
         }
@@ -45,7 +46,7 @@ class CategoriasViewModel(
     private fun apagarCategoria(categoria: Categoria) {
         viewModelScope.launch {
             withContext(Dispatchers.IO) {
-                database.apagarCategoria(categoria)
+                database.produtosDao.apagarCategoria(categoria)
                 Timber.d("Categoria apagada: $categoria.nome")
             }
         }

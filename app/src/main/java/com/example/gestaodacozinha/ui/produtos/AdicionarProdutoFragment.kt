@@ -11,21 +11,18 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import com.example.gestaodacozinha.data.AppDatabase
 import com.example.gestaodacozinha.databinding.AdicionarProdutoFragmentBinding
 import com.example.gestaodacozinha.utils.REQUEST_IMAGE_CAPTURE
 import com.example.gestaodacozinha.utils.permissoesNecessarias
+import dagger.hilt.android.AndroidEntryPoint
 
 
+@AndroidEntryPoint
 class AdicionarProdutoFragment : Fragment() {
 
-    lateinit var binding: AdicionarProdutoFragmentBinding
+    private lateinit var binding: AdicionarProdutoFragmentBinding
 
-    private val viewModel: AdicionarProdutosViewModel by viewModels {
-        val application = requireActivity().application
-        val dataSource = AppDatabase.getInstance(application).produtosDao
-        AdicionarProdutosViewModelFactory(dataSource, application)
-    }
+    private val viewModel: AdicionarProdutosViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

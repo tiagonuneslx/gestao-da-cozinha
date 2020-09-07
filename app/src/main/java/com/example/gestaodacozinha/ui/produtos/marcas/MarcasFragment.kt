@@ -6,10 +6,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import com.example.gestaodacozinha.data.AppDatabase
 import com.example.gestaodacozinha.databinding.MarcasFragmentBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MarcasFragment : Fragment() {
+
+    private val viewModel: MarcasViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -17,12 +20,6 @@ class MarcasFragment : Fragment() {
     ): View? {
 
         val binding = MarcasFragmentBinding.inflate(inflater, container, false)
-
-        val viewModel: MarcasViewModel by viewModels {
-            val application = requireActivity().application
-            val dataSource = AppDatabase.getInstance(application).produtosDao
-            MarcasViewModelFactory(dataSource, application)
-        }
 
         val adapter = MarcaAdapter(MarcaAdapter.OnClickListener { marca ->
             viewModel.marcaClicada(marca)
