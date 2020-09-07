@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import com.example.gestaodacozinha.R
 import com.example.gestaodacozinha.data.AppDatabase
 import com.example.gestaodacozinha.databinding.ProdutoDetalhesFragmentBinding
 import com.google.android.material.transition.MaterialContainerTransform
@@ -27,12 +26,7 @@ class ProdutoDetalhesFragment : Fragment() {
             ProdutoDetalhesViewModelFactory(dataSource, produto, application)
         }
 
-        sharedElementEnterTransition = MaterialContainerTransform().apply {
-            drawingViewId = R.id.nav_host_fragment
-            duration = 400L
-            //scrimColor = Color.TRANSPARENT
-            //setAllContainerColors(requireContext().themeColor(R.attr.colorSurface))
-        }
+        sharedElementEnterTransition = MaterialContainerTransform()
 
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
