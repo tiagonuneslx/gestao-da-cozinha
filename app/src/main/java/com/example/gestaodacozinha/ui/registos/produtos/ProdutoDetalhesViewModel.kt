@@ -24,9 +24,11 @@ class ProdutoDetalhesViewModel @ViewModelInject constructor(
     application: Application
 ) : AndroidViewModel(application) {
 
-    val produtoComTudo = database.produtoDao.obterComTudo(
-        savedStateHandle.get<Produto>("produto")!!.id
-    )
+    private val produtoId = savedStateHandle.get<Produto>("produto")!!.id
+
+    val produtoComTudo = database.produtoDao.obterComTudo(produtoId)
+
+    val produtoQuantidades = database.produtoQuantidadeDao.obterTodas(produtoId)
 
     val novaQuantidade = MutableLiveData<String>()
 

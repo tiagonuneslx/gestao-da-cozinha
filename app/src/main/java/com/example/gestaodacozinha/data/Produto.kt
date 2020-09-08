@@ -46,9 +46,4 @@ data class ProdutoComTudo(
         entityColumn = "nome",
     )
     val marca: Marca,
-    @Relation(
-        parentColumn = "id",
-        entityColumn = "produto_id",
-    )
-    val quantidades: List<ProdutoQuantidade>,
 )

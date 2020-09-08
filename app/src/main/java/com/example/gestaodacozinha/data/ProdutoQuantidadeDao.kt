@@ -1,9 +1,7 @@
 package com.example.gestaodacozinha.data
 
-import androidx.room.Dao
-import androidx.room.Delete
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
+import androidx.lifecycle.LiveData
+import androidx.room.*
 
 @Dao
 interface ProdutoQuantidadeDao {
@@ -13,4 +11,7 @@ interface ProdutoQuantidadeDao {
 
     @Delete
     suspend fun apagar(produtoQuantidade: ProdutoQuantidade)
+
+    @Query("SELECT * FROM produtos_quantidades WHERE produto_id = :produtoId ORDER BY quantidade")
+    fun obterTodas(produtoId: Long): LiveData<List<ProdutoQuantidade>>
 }
