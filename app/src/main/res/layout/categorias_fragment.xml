@@ -7,14 +7,14 @@
 
         <variable
             name="viewModel"
-            type="com.example.gestaodacozinha.ui.produtos.categorias.CategoriasViewModel" />
+            type="com.example.gestaodacozinha.ui.registos.categorias.CategoriasViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/main"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.produtos.CategoriasFragment">
+        tools:context=".ui.registos.CategoriasFragment">
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/botao_adicionar_categoria"

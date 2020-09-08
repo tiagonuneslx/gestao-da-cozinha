@@ -9,7 +9,7 @@
 
         <variable
             name="viewModel"
-            type="com.example.gestaodacozinha.ui.produtos.ProdutoDetalhesViewModel" />
+            type="com.example.gestaodacozinha.ui.registos.produtos.ProdutoDetalhesViewModel" />
     </data>
 
     <com.google.android.material.card.MaterialCardView
@@ -22,7 +22,7 @@
             android:id="@+id/main"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:context=".ui.produtos.ProdutosFragment">
+            tools:context=".ui.registos.produtos.ProdutosFragment">
 
             <LinearLayout
                 android:id="@+id/linearLayout"

@@ -1,4 +1,4 @@
-package com.example.gestaodacozinha.ui.produtos.categorias
+package com.example.gestaodacozinha.ui.registos.marcas
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,25 +6,25 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import com.example.gestaodacozinha.databinding.CategoriasFragmentBinding
+import com.example.gestaodacozinha.databinding.MarcasFragmentBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class CategoriasFragment : Fragment() {
+class MarcasFragment : Fragment() {
 
-    private val viewModel: CategoriasViewModel by viewModels()
+    private val viewModel: MarcasViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
 
-        val binding = CategoriasFragmentBinding.inflate(inflater, container, false)
+        val binding = MarcasFragmentBinding.inflate(inflater, container, false)
 
-        val adapter = CategoriaAdapter(CategoriaAdapter.OnClickListener { categoria ->
-            viewModel.categoriaClicada(categoria)
+        val adapter = MarcaAdapter(MarcaAdapter.OnClickListener { marca ->
+            viewModel.marcaClicada(marca)
         })
-        binding.listaCategorias.adapter = adapter
+        binding.listaMarcas.adapter = adapter
 
         binding.viewModel = viewModel
         binding.lifecycleOwner = this

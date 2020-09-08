@@ -14,10 +14,10 @@ interface ProdutoDao {
     @Delete
     suspend fun apagar(produto: Produto)
 
-    @Query("SELECT * FROM produtos ORDER BY id DESC")
+    @Query("SELECT * FROM registos ORDER BY id DESC")
     fun obterTodos(): LiveData<List<Produto>>
 
     @Transaction
-    @Query("SELECT * FROM produtos WHERE id = :produtoId")
+    @Query("SELECT * FROM registos WHERE id = :produtoId")
     fun obterComTudo(produtoId: Long): LiveData<ProdutoComTudo>
 }

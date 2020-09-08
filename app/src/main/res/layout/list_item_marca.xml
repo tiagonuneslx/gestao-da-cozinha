@@ -11,7 +11,7 @@
 
         <variable
             name="clickListener"
-            type="com.example.gestaodacozinha.ui.produtos.marcas.MarcaAdapter.OnClickListener" />
+            type="com.example.gestaodacozinha.ui.registos.marcas.MarcaAdapter.OnClickListener" />
 
     </data>
 

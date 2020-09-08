@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="com.example.gestaodacozinha.ui.produtos.AdicionarProdutosViewModel" />
+            type="com.example.gestaodacozinha.ui.registos.produtos.AdicionarProdutosViewModel" />
     </data>
 
     <ScrollView
@@ -18,7 +18,7 @@
             android:id="@+id/main"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            tools:context=".ui.produtos.ProdutosFragment">
+            tools:context=".ui.registos.produtos.ProdutosFragment">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/nome_textview"

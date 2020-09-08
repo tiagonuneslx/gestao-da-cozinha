@@ -1,4 +1,4 @@
-package com.example.gestaodacozinha.ui.produtos.marcas
+package com.example.gestaodacozinha.ui.registos.marcas
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

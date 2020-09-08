@@ -1,47 +1,55 @@
-package com.example.gestaodacozinha.ui.produtos
+package com.example.gestaodacozinha.ui.registos.marcas
 
 import android.app.Application
 import android.view.View
 import android.widget.ImageView
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.gestaodacozinha.GestaoCozinhaApp
 import com.example.gestaodacozinha.data.AppDatabase
-import com.example.gestaodacozinha.data.Produto
+import com.example.gestaodacozinha.data.Marca
 import com.example.gestaodacozinha.utils.alternarCorApagar
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class ProdutosViewModel @ViewModelInject constructor(
+
+class MarcasViewModel @ViewModelInject constructor(
     private val database: AppDatabase,
     application: Application
 ) : AndroidViewModel(application) {
 
-    val produtos = database.produtoDao.obterTodos()
+    val marcas = database.marcaDao.obterTodas()
 
-    private val _navegarProdutoDetalhes = MutableLiveData<Pair<Produto, View>>(null)
-    val navegarProdutoDetalhes: LiveData<Pair<Produto, View>>
-        get() = _navegarProdutoDetalhes
+    val novaMarcaNome = MutableLiveData("")
+    val novaMarcaBranca = MutableLiveData(false)
 
     private var apagar = false
 
-    fun produtoClicado(produto: Produto, view: View) {
-        if (apagar) apagarProduto(produto)
-        else _navegarProdutoDetalhes.value = Pair(produto, view)
+    fun adicionarMarca(view: View) {
+        if (novaMarcaNome.value != null && novaMarcaBranca.value != null) {
+            val marca = Marca(
+                nome = novaMarcaNome.value!!,
+                branca = novaMarcaBranca.value!!,
+            )
+            viewModelScope.launch {
+                withContext(Dispatchers.IO) {
+                    database.marcaDao.inserir(marca)
+                }
+            }
+        }
     }
 
-    fun navegarProdutoDetalhesConcluido() {
-        _navegarProdutoDetalhes.value = null
+    fun marcaClicada(marca: Marca) {
+        if (apagar) apagarMarca(marca)
     }
 
-    private fun apagarProduto(produto: Produto) {
+    private fun apagarMarca(marca: Marca) {
         viewModelScope.launch {
             withContext(Dispatchers.IO) {
-                database.produtoDao.apagar(produto)
+                database.marcaDao.apagar(marca)
             }
         }
     }

@@ -1,12 +1,27 @@
 package com.example.gestaodacozinha.data
 
+import androidx.room.ColumnInfo
 import androidx.room.Entity
+import androidx.room.ForeignKey
+import androidx.room.PrimaryKey
 
 @Entity(
-    tableName = "produto_quantidade",
-    primaryKeys = ["produtoId", "quantidade"]
+    tableName = "produtos_quantidades",
+    foreignKeys = [
+        ForeignKey(
+            entity = Produto::class,
+            parentColumns = ["id"],
+            childColumns = ["produto_id"],
+            onUpdate = ForeignKey.CASCADE,
+            onDelete = ForeignKey.CASCADE,
+        )
+    ]
 )
 data class ProdutoQuantidade(
+    @PrimaryKey(autoGenerate = true)
+    val id: Long,
+    @ColumnInfo(name = "produto_id")
     val produtoId: Long,
     val quantidade: Float,
+    val foto: String? = null,
 )

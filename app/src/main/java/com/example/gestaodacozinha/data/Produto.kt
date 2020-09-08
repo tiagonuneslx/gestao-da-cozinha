@@ -7,7 +7,7 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 @Entity(
-    tableName = "produtos",
+    tableName = "registos",
     foreignKeys = [
         ForeignKey(
             entity = Categoria::class,
@@ -29,7 +29,7 @@ data class Produto(
     @PrimaryKey(autoGenerate = true)
     var id: Long = 0L,
     val nome: String,
-    val foto: String,
+    val foto: String? = null,
     val categoria: String,
     val marca: String,
 ) : Parcelable
@@ -46,4 +46,9 @@ data class ProdutoComTudo(
         entityColumn = "nome",
     )
     val marca: Marca,
+    @Relation(
+        parentColumn = "id",
+        entityColumn = "produto_id",
+    )
+    val quantidades: List<ProdutoQuantidade>,
 )

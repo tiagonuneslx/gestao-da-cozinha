@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/produtos"
-        android:name="com.example.gestaodacozinha.ui.produtos.ProdutosFragment"
+        android:name="com.example.gestaodacozinha.ui.registos.produtos.ProdutosFragment"
         android:label="Produtos"
         tools:layout="@layout/produtos_fragment">
         <action
@@ -19,12 +19,12 @@
     </fragment>
     <fragment
         android:id="@+id/categorias"
-        android:name="com.example.gestaodacozinha.ui.produtos.categorias.CategoriasFragment"
+        android:name="com.example.gestaodacozinha.ui.registos.categorias.CategoriasFragment"
         android:label="Categorias"
         tools:layout="@layout/categorias_fragment" />
     <fragment
         android:id="@+id/adicionarProdutoFragment"
-        android:name="com.example.gestaodacozinha.ui.produtos.AdicionarProdutoFragment"
+        android:name="com.example.gestaodacozinha.ui.registos.produtos.AdicionarProdutoFragment"
         android:label="Adicionar Produto"
         tools:layout="@layout/adicionar_produto_fragment">
         <action
@@ -35,7 +35,7 @@
     </fragment>
     <fragment
         android:id="@+id/produtoDetalhesFragment"
-        android:name="com.example.gestaodacozinha.ui.produtos.ProdutoDetalhesFragment"
+        android:name="com.example.gestaodacozinha.ui.registos.produtos.ProdutoDetalhesFragment"
         android:label="Detalhes do produto"
         tools:layout="@layout/produto_detalhes_fragment">
         <argument
@@ -44,7 +44,7 @@
     </fragment>
     <fragment
         android:id="@+id/marcas"
-        android:name="com.example.gestaodacozinha.ui.produtos.marcas.MarcasFragment"
+        android:name="com.example.gestaodacozinha.ui.registos.marcas.MarcasFragment"
         android:label="Marcas"
         tools:layout="@layout/marcas_fragment" />
 </navigation>
