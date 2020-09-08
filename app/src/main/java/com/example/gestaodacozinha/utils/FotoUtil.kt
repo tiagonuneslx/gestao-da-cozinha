@@ -26,9 +26,18 @@ fun obterUriParaFoto(context: Context): File {
 
 @BindingAdapter("imageUri")
 fun bindImageFromUri(imgView: ImageView, imageUri: Uri?) {
-    imageUri?.let {
+    if (imageUri != null) {
         Glide.with(imgView.context)
-            .load(it)
+            .load(imageUri)
+            .apply(
+                RequestOptions()
+                    .placeholder(R.drawable.loading_animation)
+                    .error(R.drawable.ic_broken_image)
+            )
+            .into(imgView)
+    } else {
+        Glide.with(imgView.context)
+            .load("")
             .apply(
                 RequestOptions()
                     .placeholder(R.drawable.loading_animation)

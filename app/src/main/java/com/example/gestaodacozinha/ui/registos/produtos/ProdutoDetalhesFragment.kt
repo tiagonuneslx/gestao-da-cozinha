@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.example.gestaodacozinha.databinding.ProdutoDetalhesFragmentBinding
+import com.example.gestaodacozinha.ui.registos.produtoQuantidades.ProdutoQuantidadeAdapter
 import com.google.android.material.transition.MaterialContainerTransform
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -20,9 +21,14 @@ class ProdutoDetalhesFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
+        sharedElementEnterTransition = MaterialContainerTransform()
+
         val binding = ProdutoDetalhesFragmentBinding.inflate(inflater, container, false)
 
-        sharedElementEnterTransition = MaterialContainerTransform()
+        binding.listaQuantidades.adapter =
+            ProdutoQuantidadeAdapter(ProdutoQuantidadeAdapter.OnClickListener { produtoQuantidade, view ->
+                viewModel.produtoClicado(produtoQuantidade, view)
+            })
 
         binding.viewModel = viewModel
         binding.lifecycleOwner = this

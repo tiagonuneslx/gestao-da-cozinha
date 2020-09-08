@@ -19,7 +19,7 @@ import androidx.room.PrimaryKey
 )
 data class ProdutoQuantidade(
     @PrimaryKey(autoGenerate = true)
-    val id: Long,
+    val id: Long = 0L,
     @ColumnInfo(name = "produto_id")
     val produtoId: Long,
     val quantidade: Float,
