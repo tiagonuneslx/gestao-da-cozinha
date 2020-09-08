@@ -7,6 +7,7 @@ Gestão da Cozinha é uma app de Android desenvolvida com o intuito de praticar 
 - [X] ConstraintLayout
 - [X] RecyclerView & Spinner
 - [X] Navigation & SafeArgs
+- [X] ActionBar & DrawerLayout w/ Navigation
 - [X] ViewModel & LiveData
 - [X] Data binding
 - [X] Room Persistance Library
