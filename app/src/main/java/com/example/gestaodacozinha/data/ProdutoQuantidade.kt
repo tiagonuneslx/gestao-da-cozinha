@@ -7,6 +7,6 @@ import androidx.room.Entity
     primaryKeys = ["produtoId", "quantidade"]
 )
 data class ProdutoQuantidade(
-    val produtoId: Float,
+    val produtoId: Long,
     val quantidade: Float,
 )

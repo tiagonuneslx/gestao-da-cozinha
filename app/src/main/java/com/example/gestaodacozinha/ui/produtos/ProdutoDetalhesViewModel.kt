@@ -14,7 +14,7 @@ class ProdutoDetalhesViewModel @ViewModelInject constructor(
     application: Application
 ) : AndroidViewModel(application) {
 
-    val produtoComTudo = database.produtosDao.obterProdutoComTudo(
+    val produtoComTudo = database.produtoDao.obterComTudo(
         savedStateHandle.get<Produto>("produto")!!.id
     )
 

@@ -30,5 +30,8 @@ import androidx.room.RoomDatabase
     exportSchema = false
 )
 abstract class AppDatabase : RoomDatabase() {
-    abstract val produtosDao: ProdutosDao
+    abstract val produtoDao: ProdutoDao
+    abstract val produtoQuantidadeDao: ProdutoQuantidadeDao
+    abstract val categoriaDao: CategoriaDao
+    abstract val marcaDao: MarcaDao
 }

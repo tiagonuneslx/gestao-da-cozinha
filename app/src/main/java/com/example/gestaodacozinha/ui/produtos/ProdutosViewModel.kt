@@ -15,14 +15,13 @@ import com.example.gestaodacozinha.utils.alternarCorApagar
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import timber.log.Timber
 
 class ProdutosViewModel @ViewModelInject constructor(
     private val database: AppDatabase,
     application: Application
 ) : AndroidViewModel(application) {
 
-    val produtos = database.produtosDao.obterTodosProdutos()
+    val produtos = database.produtoDao.obterTodos()
 
     private val _navegarProdutoDetalhes = MutableLiveData<Pair<Produto, View>>(null)
     val navegarProdutoDetalhes: LiveData<Pair<Produto, View>>
@@ -42,8 +41,7 @@ class ProdutosViewModel @ViewModelInject constructor(
     private fun apagarProduto(produto: Produto) {
         viewModelScope.launch {
             withContext(Dispatchers.IO) {
-                database.produtosDao.apagarProduto(produto)
-                Timber.d("Produto apagado: $produto.nome")
+                database.produtoDao.apagar(produto)
             }
         }
     }

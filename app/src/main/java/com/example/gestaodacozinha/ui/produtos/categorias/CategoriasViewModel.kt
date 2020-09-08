@@ -14,7 +14,6 @@ import com.example.gestaodacozinha.utils.alternarCorApagar
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import timber.log.Timber
 
 
 class CategoriasViewModel @ViewModelInject constructor(
@@ -22,7 +21,7 @@ class CategoriasViewModel @ViewModelInject constructor(
     application: Application
 ) : AndroidViewModel(application) {
 
-    val categorias = database.produtosDao.obterTodasCategorias()
+    val categorias = database.categoriaDao.obterTodas()
 
     val novaCategoriaNome = MutableLiveData("")
 
@@ -33,7 +32,7 @@ class CategoriasViewModel @ViewModelInject constructor(
             val categoria = Categoria(it)
             viewModelScope.launch {
                 withContext(Dispatchers.IO) {
-                    database.produtosDao.inserirCategoria(categoria)
+                    database.categoriaDao.inserir(categoria)
                 }
             }
         }
@@ -46,8 +45,7 @@ class CategoriasViewModel @ViewModelInject constructor(
     private fun apagarCategoria(categoria: Categoria) {
         viewModelScope.launch {
             withContext(Dispatchers.IO) {
-                database.produtosDao.apagarCategoria(categoria)
-                Timber.d("Categoria apagada: $categoria.nome")
+                database.categoriaDao.apagar(categoria)
             }
         }
     }

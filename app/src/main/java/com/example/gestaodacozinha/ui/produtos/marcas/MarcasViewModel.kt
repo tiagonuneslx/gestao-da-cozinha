@@ -14,7 +14,6 @@ import com.example.gestaodacozinha.utils.alternarCorApagar
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import timber.log.Timber
 
 
 class MarcasViewModel @ViewModelInject constructor(
@@ -22,7 +21,7 @@ class MarcasViewModel @ViewModelInject constructor(
     application: Application
 ) : AndroidViewModel(application) {
 
-    val marcas = database.produtosDao.obterTodasMarcas()
+    val marcas = database.marcaDao.obterTodas()
 
     val novaMarcaNome = MutableLiveData("")
     val novaMarcaBranca = MutableLiveData(false)
@@ -37,7 +36,7 @@ class MarcasViewModel @ViewModelInject constructor(
             )
             viewModelScope.launch {
                 withContext(Dispatchers.IO) {
-                    database.produtosDao.inserirMarca(marca)
+                    database.marcaDao.inserir(marca)
                 }
             }
         }
@@ -50,8 +49,7 @@ class MarcasViewModel @ViewModelInject constructor(
     private fun apagarMarca(marca: Marca) {
         viewModelScope.launch {
             withContext(Dispatchers.IO) {
-                database.produtosDao.apagarMarca(marca)
-                Timber.d("Marca apagada: $marca.nome")
+                database.marcaDao.apagar(marca)
             }
         }
     }

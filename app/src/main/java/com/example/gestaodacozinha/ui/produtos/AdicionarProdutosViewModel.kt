@@ -27,8 +27,8 @@ class AdicionarProdutosViewModel @ViewModelInject constructor(
     application: Application
 ) : AndroidViewModel(application) {
 
-    val categorias = database.produtosDao.obterTodasCategorias()
-    val marcas = database.produtosDao.obterTodasMarcas()
+    val categorias = database.categoriaDao.obterTodas()
+    val marcas = database.marcaDao.obterTodas()
 
     val nome = MutableLiveData("")
     val categoria = MutableLiveData<Categoria>(null)
@@ -101,8 +101,7 @@ class AdicionarProdutosViewModel @ViewModelInject constructor(
             )
             viewModelScope.launch {
                 withContext(Dispatchers.IO) {
-                    database.produtosDao.inserirProduto(produto)
-                    Timber.d("Produto $produto adicionado com sucesso!")
+                    database.produtoDao.inserir(produto)
                 }
                 _navegarProdutos.value = true
             }
