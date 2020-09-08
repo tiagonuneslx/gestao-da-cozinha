@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="com.example.gestaodacozinha.ui.registos.produtos.AdicionarProdutosViewModel" />
+            type="com.example.gestaodacozinha.ui.registos.produtos.AdicionarProdutoViewModel" />
     </data>
 
     <ScrollView
