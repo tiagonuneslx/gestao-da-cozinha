@@ -26,12 +26,6 @@ class MarcasFragment : Fragment() {
         })
         binding.listaMarcas.adapter = adapter
 
-        viewModel.marcas.observe(viewLifecycleOwner) {
-            it?.let {
-                adapter.submitList(it)
-            }
-        }
-
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
 

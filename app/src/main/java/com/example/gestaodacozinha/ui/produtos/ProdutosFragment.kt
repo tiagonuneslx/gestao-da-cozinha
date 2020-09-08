@@ -29,12 +29,6 @@ class ProdutosFragment : Fragment() {
         })
         binding.listaProdutos.adapter = adapter
 
-        viewModel.produtos.observe(viewLifecycleOwner) {
-            it?.let {
-                adapter.submitList(it)
-            }
-        }
-
         viewModel.navegarProdutoDetalhes.observe(viewLifecycleOwner) {
             it?.let {
                 val nomeTransicaoProdutoDetalhes =

@@ -26,12 +26,6 @@ class CategoriasFragment : Fragment() {
         })
         binding.listaCategorias.adapter = adapter
 
-        viewModel.categorias.observe(viewLifecycleOwner) {
-            it?.let {
-                adapter.submitList(it)
-            }
-        }
-
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
 
