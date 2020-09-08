@@ -1,3 +1,6 @@
+# Visual Paradigm junk files
+*.bak*
+
 # Built application files
 *.apk
 *.aar
