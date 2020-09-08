@@ -1,5 +1,5 @@
-# Visual Paradigm junk files
-*.bak*
+# Visual Paradigm junk and lock files
+*.vpp.*
 
 # Built application files
 *.apk
