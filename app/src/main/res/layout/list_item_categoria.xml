@@ -7,7 +7,7 @@
 
         <variable
             name="categoria"
-            type="com.example.gestaodacozinha.data.Categoria" />
+            type="com.example.gestaodacozinha.data.registos.Categoria" />
 
         <variable
             name="clickListener"

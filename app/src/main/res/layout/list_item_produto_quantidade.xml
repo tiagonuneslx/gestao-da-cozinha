@@ -8,7 +8,7 @@
 
         <variable
             name="produtoQuantidade"
-            type="com.example.gestaodacozinha.data.ProdutoQuantidade" />
+            type="com.example.gestaodacozinha.data.registos.ProdutoQuantidade" />
 
         <variable
             name="clickListener"

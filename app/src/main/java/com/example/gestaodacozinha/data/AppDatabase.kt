@@ -18,6 +18,7 @@ package com.example.gestaodacozinha.data
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
+import com.example.gestaodacozinha.data.registos.*
 
 @Database(
     entities = [

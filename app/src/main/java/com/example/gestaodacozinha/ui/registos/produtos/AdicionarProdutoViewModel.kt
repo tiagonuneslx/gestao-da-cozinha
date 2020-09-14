@@ -11,9 +11,9 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.gestaodacozinha.GestaoCozinhaApp
 import com.example.gestaodacozinha.data.AppDatabase
-import com.example.gestaodacozinha.data.Categoria
-import com.example.gestaodacozinha.data.Marca
-import com.example.gestaodacozinha.data.Produto
+import com.example.gestaodacozinha.data.registos.Categoria
+import com.example.gestaodacozinha.data.registos.Marca
+import com.example.gestaodacozinha.data.registos.Produto
 import com.example.gestaodacozinha.utils.obterUriParaFoto
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

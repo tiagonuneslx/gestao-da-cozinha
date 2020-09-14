@@ -40,7 +40,7 @@
         tools:layout="@layout/produto_detalhes_fragment">
         <argument
             android:name="produto"
-            app:argType="com.example.gestaodacozinha.data.Produto" />
+            app:argType="com.example.gestaodacozinha.data.registos.Produto" />
     </fragment>
     <fragment
         android:id="@+id/marcas"

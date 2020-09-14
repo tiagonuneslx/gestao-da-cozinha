@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.gestaodacozinha.data.Marca
+import com.example.gestaodacozinha.data.registos.Marca
 import com.example.gestaodacozinha.databinding.ListItemMarcaBinding
 
 class MarcaAdapter(private val onClickListener: OnClickListener) :

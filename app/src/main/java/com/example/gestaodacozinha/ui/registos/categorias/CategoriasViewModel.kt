@@ -9,7 +9,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.gestaodacozinha.GestaoCozinhaApp
 import com.example.gestaodacozinha.data.AppDatabase
-import com.example.gestaodacozinha.data.Categoria
+import com.example.gestaodacozinha.data.registos.Categoria
 import com.example.gestaodacozinha.utils.alternarCorApagar
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

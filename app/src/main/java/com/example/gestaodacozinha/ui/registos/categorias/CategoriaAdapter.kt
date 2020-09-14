@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.gestaodacozinha.data.Categoria
+import com.example.gestaodacozinha.data.registos.Categoria
 import com.example.gestaodacozinha.databinding.ListItemCategoriaBinding
 
 class CategoriaAdapter(private val onClickListener: OnClickListener) :

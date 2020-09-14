@@ -11,8 +11,8 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
 import com.example.gestaodacozinha.GestaoCozinhaApp
 import com.example.gestaodacozinha.data.AppDatabase
-import com.example.gestaodacozinha.data.Produto
-import com.example.gestaodacozinha.data.ProdutoQuantidade
+import com.example.gestaodacozinha.data.registos.Produto
+import com.example.gestaodacozinha.data.registos.ProdutoQuantidade
 import com.example.gestaodacozinha.utils.alternarCorApagar
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

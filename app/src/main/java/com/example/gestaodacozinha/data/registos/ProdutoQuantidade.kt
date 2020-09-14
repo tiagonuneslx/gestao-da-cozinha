@@ -1,4 +1,4 @@
-package com.example.gestaodacozinha.data
+package com.example.gestaodacozinha.data.registos
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

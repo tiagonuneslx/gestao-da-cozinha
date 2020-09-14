@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.gestaodacozinha.data.ProdutoQuantidade
+import com.example.gestaodacozinha.data.registos.ProdutoQuantidade
 import com.example.gestaodacozinha.databinding.ListItemProdutoQuantidadeBinding
 
 class ProdutoQuantidadeAdapter(private val onClickListener: OnClickListener) :

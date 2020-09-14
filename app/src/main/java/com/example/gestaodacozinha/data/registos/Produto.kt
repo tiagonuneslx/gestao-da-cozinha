@@ -1,4 +1,4 @@
-package com.example.gestaodacozinha.data
+package com.example.gestaodacozinha.data.registos
 
 import android.os.Parcelable
 import androidx.room.*

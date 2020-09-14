@@ -7,7 +7,7 @@
 
         <variable
             name="marca"
-            type="com.example.gestaodacozinha.data.Marca" />
+            type="com.example.gestaodacozinha.data.registos.Marca" />
 
         <variable
             name="clickListener"
