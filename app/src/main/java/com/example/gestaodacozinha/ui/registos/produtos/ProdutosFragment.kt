@@ -1,9 +1,7 @@
 package com.example.gestaodacozinha.ui.registos.produtos
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.FragmentNavigatorExtras
@@ -41,13 +39,27 @@ class ProdutosFragment : Fragment() {
             }
         }
 
-        binding.botaoAdicionarProduto.setOnClickListener {
+        binding.novoProdutoFab.setOnClickListener {
             findNavController().navigate(ProdutosFragmentDirections.actionProdutosToAdicionarProdutoFragment())
         }
 
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
 
+        setHasOptionsMenu(true)
+
         return binding.root
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.produtos_menu, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.apagar_item -> viewModel.alternarApagar(item)
+        }
+        return super.onOptionsItemSelected(item)
     }
 }

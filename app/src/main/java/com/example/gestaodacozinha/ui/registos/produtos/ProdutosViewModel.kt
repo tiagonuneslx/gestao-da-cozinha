@@ -1,8 +1,8 @@
 package com.example.gestaodacozinha.ui.registos.produtos
 
 import android.app.Application
+import android.view.MenuItem
 import android.view.View
-import android.widget.ImageView
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
@@ -46,11 +46,11 @@ class ProdutosViewModel @ViewModelInject constructor(
         }
     }
 
-    fun alternarApagar(view: View) {
+    fun alternarApagar(item: MenuItem) {
         apagar = !apagar
         alternarCorApagar(
             getApplication<GestaoCozinhaApp>(),
-            view as ImageView,
+            item,
             apagar
         )
     }
