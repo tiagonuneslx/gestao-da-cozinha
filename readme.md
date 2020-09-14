@@ -13,7 +13,7 @@ Gestão da Cozinha é uma app de Android desenvolvida com o intuito de praticar 
 - [X] Room Persistance Library
 - [X] Kotlin Coroutines
 - [X] Material Theme & Components
-- [X] Permissions (nova biblioteca androidx.activity)
+- [X] Intents & Permissions (nova biblioteca androidx.activity)
 - [X] Hilt Dependency Injection (novo Dagger2)
 - [X] Glide (imagens)
 - [X] Timber Logging
