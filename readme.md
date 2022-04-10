@@ -1,6 +1,6 @@
-# Gestão da Cozinha App
+# Kitchen Management App
 
-Gestão da Cozinha é uma app de Android desenvolvida com o intuito de praticar o desenvolvimento em Android e experimentar as mais recentes bibliotecas e frameworks.
+This is an Android app developed as a practice tool for me to experiment with Android and try the most recent libraries and frameworks.
 
 ## Features (Android Dev)
 
